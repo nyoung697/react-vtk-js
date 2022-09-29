@@ -387,9 +387,6 @@ export default class View extends Component {
 
     this.update(this.props);
     this.resetCamera();
-
-    // Give a chance for the first layout to properly reset the camera
-    this.firstResetTimeout = setTimeout(() => this.resetCamera(), 100);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -401,7 +398,6 @@ export default class View extends Component {
     if (this.hover) this.hover.cancel();
     clearTimeout(this.resetCameraTimeout);
     clearTimeout(this.renderViewTimeout);
-    clearTimeout(this.firstResetTimeout);
 
     while (this.subscriptions.length) {
       this.subscriptions.pop().unsubscribe();
